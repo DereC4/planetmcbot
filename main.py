@@ -77,7 +77,7 @@ async def updatecomment():
 		tempcomment = actualpage.find(class_="forum_reply")
 		global latestcomment
 		# print("test")
-		if (tempcomment==latestcomment):
+		if (tempcomment!=latestcomment):
 			print("New Comment Detected!")
 			latestcomment = tempcomment
 			latestcommenttext = latestcomment.find(class_="contents pmc_readmore").get_text()
