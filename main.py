@@ -6,13 +6,12 @@ import requests
 import asyncio
 
 # Your mod page URL
-URL = 'https://www.planetminecraft.com/mod/minecraft-earth-mod/'
+URL = "https://www.planetminecraft.com/data-pack/derec-s-silverfish-drops/"   # replace url with anti-bot protected website
 # https://www.curseforge.com/minecraft/mc-mods/minecraft-earth-mod
 # The URL above is my mod URL
 
-target_url = "https://www.planetminecraft.com/mod/minecraft-earth-mod/"   # replace url with anti-bot protected website
 scraper = cfscrape.create_scraper(delay=10)
-html_text = scraper.get(target_url).text
+html_text = scraper.get(URL).text
 actualpage = BeautifulSoup(html_text, 'html.parser')
 # print(actualpage.prettify())
 # print(actualpage.a)
@@ -74,13 +73,17 @@ async def setchannel(ctx):
 
 async def updatecomment():
 	while True:
+		# print(tempcomment.prettify())
+		html_text = scraper.get(URL).text
+		actualpage = BeautifulSoup(html_text, 'html.parser')
 		tempcomment = actualpage.find(class_="forum_reply")
 		global latestcomment
-		# print("test")
+		# print("test")	
 		if (tempcomment!=latestcomment):
 			print("New Comment Detected!")
 			latestcomment = tempcomment
 			latestcommenttext = latestcomment.find(class_="contents pmc_readmore").get_text()
+			print(latestcommenttext)
 			emeraldscore = latestcomment.find(class_="score").get_text()
 			timepublished = "Published On: " + latestcomment.find(class_="time_box").findChild().text
 			PMCuserlevel = latestcomment.find(class_="rank_box").findChild(class_="member_level").text
