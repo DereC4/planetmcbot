@@ -95,7 +95,7 @@ async def updatecomment():
 			for username in PMCuserName:
 				PMCuserName = username['href'][8:-1]
 				break
-		await asyncio.sleep(10)
+		await asyncio.sleep(120)
 
 def commentbuilder():
 	embed=discord.Embed(title="Latest Comment", url="https://www.planetminecraft.com/mod/minecraft-earth-mod/", color=0xff7b00)
